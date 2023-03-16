@@ -62,7 +62,9 @@ function authenticate (req) {
     let password
     if (req && req.query && req.query.username) username = req.query.username
     if (req && req.query && req.query.password) password = req.query.password
-
+    
+    if(!username && req.body.username) username = req.body.username
+    if(!password && req.body.password) password = req.body.password
     // Validate user's credentials
     validateCredentials(username, password, _userStoreFilePath)
       .then(valid => {
